@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+  get 'category/index'
+
+  get 'category/new'
+
+  get 'category/edit'
+
+  get 'category/show'
+
+  get 'item/index'
+
+  get 'item/new'
+
+  get 'item/edit'
+
+  get 'item/show'
+
+  get 'purchase/index'
+
+  get 'purchase/new'
+
+  get 'purchase/edit'
+
+  get 'purchase/show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
