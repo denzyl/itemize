@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  brand_name: MyString
+  item_name: MyString
+  quantity: 9.99
+  weight: 9.99
+  measurement: MyString
+  cost: 9.99
+  item_total_cost: 9.99
+
+two:
+  brand_name: MyString
+  item_name: MyString
+  quantity: 9.99
+  weight: 9.99
+  measurement: MyString
+  cost: 9.99
+  item_total_cost: 9.99
