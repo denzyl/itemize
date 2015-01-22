@@ -1,0 +1,13 @@
+<h1>Purchases</h1>
+<ol>
+  <% @purchases.each do |attr| %>
+  <li><%= attr.place %>,
+      <%= attr.purchased_on %>: $
+      <%= attr.purchased_total_cost.to_s.to_i %> for
+      <%= link_to("#{attr.items.size} items", purchase_path(attr)) %>
+      <%= link_to "Delete", purchase_path(attr), method: :delete, data: {confirm: "Are you sure?" }%>
+      </li>
+  <% end %>
+</ol>
+
+<p><%= link_to 'New Purchase', new_purchase_path %></p>

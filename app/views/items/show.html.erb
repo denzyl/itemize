@@ -1,0 +1,19 @@
+<h1>Item#show</h1>
+<p>Find me in app/views/item/show.html.erb</p>
+<h1><%= @purchase.place %></h1>
+
+<ol class="questions">
+<% @purchase.items.each do |item| %>
+  <li>
+    <%= item.brand_name %>
+    <%= item.item_name %>
+    <%= item.quantity %>
+    <%= item.weight %>
+    <%= item.measurement %>
+    <%= BigDecimal(item.cost).round(2) %>
+    <%= BigDecimal(item.item_total_cost).round(2) %>
+  </li>
+<% end %>
+</ol>
+
+<%= link_to 'Edit', edit_purchase_path(@purchase) %> | <%= link_to 'Back to Purchases', purchases_path %>

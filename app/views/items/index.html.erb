@@ -1,0 +1,17 @@
+<h1>Items</h1>
+<ol>
+<% @items.each do |item| %>
+<%# attr.attributes.each do |k, v| %>
+  <%# k %>
+<%#end %>
+<li>
+  <%= item.brand_name %>
+    <%= item.item_name %> on <%= item.purchases.count %> <%="Purchase".pluralize(item.purchases.count) %> on <%= link_to item.purchases.first.purchased_on, edit_purchase_path(item.purchases.first) %>
+    <%= item.quantity %>
+    <%= item.weight %>
+    <%= item.measurement %>
+    <%= BigDecimal(item.cost).round(2) %>
+    <%= BigDecimal(item.item_total_cost).round(2) %>
+  </li>
+<% end %>
+</ol>

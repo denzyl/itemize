@@ -1,0 +1,48 @@
+<%= form_for @purchase do |f| %>
+<div style="padding-bottom: 10px;">
+    <%= f.label :purchased_on %>
+    <%= f.date_field :purchased_on %>
+  </div>
+  <div style="padding-bottom: 10px;">
+  <%= f.label :place %>
+  <%= f.text_field :place %>
+  </div>
+  <div style="padding-bottom: 10px;">
+  <%= f.label :purchased_total_cost %>
+  <%= f.text_field :purchased_total_cost %>
+  </div>
+  Items:
+  <ul>
+    <%= f.fields_for :items do |item_form| %>
+    <li>
+      <%= item_form.label :brand_name %>
+      <%= item_form.text_field :brand_name %>
+    </li>
+    <li>
+      <%= item_form.label :item_name %>
+      <%= item_form.text_field :item_name %>
+    </li>
+    <li>
+      <%= item_form.label :quantity %>
+      <%= item_form.text_field :quantity %>
+    </li>
+    <li>
+      <%= item_form.label :weight %>
+      <%= item_form.text_field :weight %>
+    </li>
+    <li>
+      <%= item_form.label :measurement %>
+      <%= item_form.text_field :measurement %>
+    </li>
+    <li>
+      <%= item_form.label :cost %>
+      <%= item_form.text_field :cost %>
+    </li>
+    <li>
+      <%= item_form.label :item_total_cost %>
+      <%= item_form.text_field :item_total_cost %>
+    </li>
+  <% end %>
+</ul>
+<%= f.submit @purchase.new_record? ? 'Create' : 'Update' %>
+<% end %>
