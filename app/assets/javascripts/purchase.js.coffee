@@ -8,10 +8,18 @@ ready = ->
     event.preventDefault()
 
   $('form').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
+    console.log(this);
+
+    container = document.getElementsByClassName('row_index')
+    lastchild = container[container.length-1].innerHTML
+    new_index = parseInt(lastchild) + 1
+    #time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
+
+    $('tr.item_table_row:last').after($(this).data('fields').replace(regexp, new_index))
+
     event.preventDefault()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
+

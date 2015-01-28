@@ -10,7 +10,7 @@ class PurchasesController < ApplicationController
 
   def new
     @purchase = Purchase.new
-    10.times { @purchase.items.build }
+    1.times { @purchase.items.build }
   end
 
   def create
@@ -24,8 +24,20 @@ class PurchasesController < ApplicationController
     end
   end
 
+  def update
+    @purchase = Purchase.find(params[:id])
+
+    if @purchase.update(purchase_params)
+      flash[:notice] = "Your purchase was updated"
+      redirect_to purchases_path(@purchase)
+    else
+      render :edit
+    end
+  end
+
   def edit
     @purchase = Purchase.find(params[:id])
+    3.times { @purchase.items.build }
   end
 
   def destroy
