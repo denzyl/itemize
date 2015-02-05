@@ -48,7 +48,7 @@ class PurchasesController < ApplicationController
 
   private
     def purchase_params
-      params[:purchase].permit(:purchased_on, :place, :purchased_total_cost, :items_attributes => [:brand_name, :item_name, :quantity, :weight, :measurement, :cost, :item_total_cost, :_destroy ])
+      params[:purchase].permit(:purchased_on, :place, :purchased_total_cost, :items_attributes => [:brand_name, :item_name, :quantity, :weight, :measurement, :cost, :item_total_cost, :item_id, :_destroy])
     end
 
 end

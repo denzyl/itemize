@@ -2,10 +2,10 @@
 <ol>
   <% @purchases.each do |attr| %>
   <li><%= attr.place %>,
-      <%= attr.purchased_on %>: $
-      <%= attr.purchased_total_cost.to_s.to_i %> for
+      <%= attr.purchased_on.strftime("%A %b #{attr.purchased_on.day}") %>:
+      $<%= attr.purchased_total_cost.to_s.to_i %> for
       <%= link_to("#{attr.items.size} items", purchase_path(attr)) %>
-      <%= link_to "Delete", purchase_path(attr), method: :delete, data: {confirm: "Are you sure?" }%>
+      <%= link_to "Delete", purchase_path(attr), method: :delete, data: {confirm: "Are you sure?" }, :class => 'col-md-offset-8'%>
       </li>
   <% end %>
 </ol>

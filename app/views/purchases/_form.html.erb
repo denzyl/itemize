@@ -2,7 +2,7 @@
 <div class="row">
   <div class="form-group col-sm-2 col-xs-4">
     <%= f.label :purchased_on, "Date", class: 'control-label' %>
-    <%= f.date_field :purchased_on, prompt: "11/11/2015", class: 'form-control' %>
+    <%= f.date_field :purchased_on, value: Date.today.to_s(:db), class: 'form-control' %>
   </div>
   <div class="form-group col-sm-2 col-xs-4">
     <%= f.label :place, "Place", class: 'control-label' %>

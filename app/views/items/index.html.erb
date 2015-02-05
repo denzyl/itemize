@@ -1,17 +1,21 @@
 <h1>Items</h1>
 <ol>
+  <% if @items.count == 0 %>
+   <p>Try entering a purchase with an item so this page shows you information.</p>
+  <% else %>
 <% @items.each do |item| %>
 <%# attr.attributes.each do |k, v| %>
   <%# k %>
 <%#end %>
 <li>
   <%= item.brand_name %>
-    <%= item.item_name %> on <%= item.purchases.count %> <%="Purchase".pluralize(item.purchases.count) %> on <%= link_to item.purchases.first.purchased_on, edit_purchase_path(item.purchases.first) %>
+    <%= item.item_name %> on <%= item.purchases.count %> <%="Purchase".pluralize(item.purchases.count) %> on <%= item.purchases.first.try(:purchased_on) %>
     <%= item.quantity %>
     <%= item.weight %>
     <%= item.measurement %>
-    <%= BigDecimal(item.cost).round(2) %>
-    <%= BigDecimal(item.item_total_cost).round(2) %>
+    <%= item.cost ? BigDecimal(item.cost).round(2) : 0 %>
+    <%= item.item_total_cost ? BigDecimal(item.item_total_cost).round(2) : 0 %>
   </li>
 <% end %>
+  <% end %>
 </ol>
