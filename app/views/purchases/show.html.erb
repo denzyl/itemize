@@ -1,17 +1,43 @@
 <h1><%= @purchase.place %></h1>
 
-<ol class="questions">
+
+<div class="row">
+  <div class="col-sm-12">
+<table class="table table-condensed table-striped" id="purchase_items">
+  <thead>
+
+    <tr>
+      <th class="col-xs-1">#</th>
+      <th class="col-xs-1">Brand name</th>
+      <th class="col-sm-1">Item name</th>
+      <th class="col-sm-1">Quantity</th>
+      <td class="col-sm-1">Weight</th>
+      <td class="col-sm-1">Measurement</th>
+      <th class="col-sm-1">Cost per item</th>
+      <th class="col-sm-1">Total Item Cost</th>
+    </tr>
+  </thead>
+
+  <tbody>
+<tbody>
+
 <% @purchase.items.each do |item| %>
-  <li>
-    <%= item.brand_name %>
-    <%= item.item_name %>
-    <%= item.quantity %>
-    <%= item.weight %>
-    <%= item.measurement %>
-    <%= BigDecimal(item.cost).round(2) %>
-    <%= BigDecimal(item.item_total_cost).round(2) %>
-  </li>
+  <tr>
+    <td><%= 1 %></td>
+    <td><%= item.brand_name %></td>
+    <td><%= item.item_name %></td>
+    <td><%= item.quantity %></td>
+    <td><%= item.weight %></td>
+    <td><%= item.measurement %></td>
+    <td><%= number_to_currency(item.cost) %></td>
+    <td><%= number_to_currency(item.item_total_cost) %></td>
+  </tr>
 <% end %>
-</ol>
+
+  </tbody>
+</table>
+</div>
+</div>
+
 
 <%= link_to 'Edit', edit_purchase_path(@purchase) %> | <%= link_to 'Back to Purchases', purchases_path %>

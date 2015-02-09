@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
 
   def index
-    @purchases = Purchase.all
+    @purchases = Purchase.all.order(:purchased_on)
   end
 
   def show
@@ -29,7 +29,7 @@ class PurchasesController < ApplicationController
 
     if @purchase.update(purchase_params)
       flash[:notice] = "Your purchase was updated"
-      redirect_to purchases_path(@purchase)
+      redirect_to @purchase
     else
       render :edit
     end
@@ -37,7 +37,6 @@ class PurchasesController < ApplicationController
 
   def edit
     @purchase = Purchase.find(params[:id])
-    3.times { @purchase.items.build }
   end
 
   def destroy
@@ -48,7 +47,8 @@ class PurchasesController < ApplicationController
 
   private
     def purchase_params
-      params[:purchase].permit(:purchased_on, :place, :purchased_total_cost, :items_attributes => [:brand_name, :item_name, :quantity, :weight, :measurement, :cost, :item_total_cost, :item_id, :_destroy])
+      params[:purchase].permit!
+      # params[:purchase].permit(:purchased_on, :place, :purchased_total_cost, :items_attributes => [:brand_name, :item_name, :quantity, :weight, :measurement, :cost, :item_total_cost, :item_id, :purchase_item_id, :_destroy])
     end
 
 end

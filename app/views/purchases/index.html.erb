@@ -1,13 +1,46 @@
 <h1>Purchases</h1>
-<ol>
-  <% @purchases.each do |attr| %>
-  <li><%= attr.place %>,
-      <%= attr.purchased_on.strftime("%A %b #{attr.purchased_on.day}") %>:
-      $<%= attr.purchased_total_cost.to_s.to_i %> for
-      <%= link_to("#{attr.items.size} items", purchase_path(attr)) %>
-      <%= link_to "Delete", purchase_path(attr), method: :delete, data: {confirm: "Are you sure?" }, :class => 'col-md-offset-8'%>
-      </li>
-  <% end %>
-</ol>
+<% increment = 0 %>
+<% total_receipt_cost = 0 %>
+<% item_total = 0 %>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table table-condensed table-striped" id="purchase_items">
+      <thead>
 
-<p><%= link_to 'New Purchase', new_purchase_path %></p>
+        <tr>
+          <th class="col-sm-1">#</th>
+          <th class="col-xs-1">Place</th>
+          <th class="col-sm-1">Date</th>
+          <th class="col-sm-1">Receipt Total</th>
+          <th class="col-sm-1">Items</th>
+          <th class="col-sm-1"> </th>
+        </tr>
+      </thead>
+      <tbody>
+
+  <% @purchases.each do |attr| %>
+      <tr>
+        <td><%= increment = increment + 1 %></td>
+        <td><%= attr.place %></td>
+        <td><%= attr.purchased_on.strftime("%A %b #{attr.purchased_on.day}") %></td>
+        <td><%= number_to_currency(attr.purchased_total_cost) %></td>
+        <% total_receipt_cost = attr.purchased_total_cost + total_receipt_cost %>
+        <% item_total = item_total + (attr.items.size) %>
+        <td><%= link_to("#{attr.items.size} item".pluralize(attr.items.size), purchase_path(attr)) %></td>
+        <td><%= link_to "Delete", purchase_path(attr), method: :delete, data: {confirm: "Are you sure?" }, :class => 'col-md-offset-8'%></td>
+      </tr>
+  <% end %>
+    <tr>
+      <td>Total</td>
+      <td> </td>
+      <td> </td>
+      <td><%= number_to_currency(total_receipt_cost) %></td>
+      <td><%= "#{item_total} item".pluralize(item_total) %> </td>
+      <td> </td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<p><%= link_to 'New Purchase', new_purchase_path %> | <%= link_to 'List of items', items_path %>  </p>

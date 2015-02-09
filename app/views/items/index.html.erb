@@ -1,21 +1,93 @@
 <h1>Items</h1>
-<ol>
-  <% if @items.count == 0 %>
-   <p>Try entering a purchase with an item so this page shows you information.</p>
-  <% else %>
-<% @items.each do |item| %>
-<%# attr.attributes.each do |k, v| %>
-  <%# k %>
-<%#end %>
-<li>
-  <%= item.brand_name %>
-    <%= item.item_name %> on <%= item.purchases.count %> <%="Purchase".pluralize(item.purchases.count) %> on <%= item.purchases.first.try(:purchased_on) %>
-    <%= item.quantity %>
-    <%= item.weight %>
-    <%= item.measurement %>
-    <%= item.cost ? BigDecimal(item.cost).round(2) : 0 %>
-    <%= item.item_total_cost ? BigDecimal(item.item_total_cost).round(2) : 0 %>
-  </li>
-<% end %>
-  <% end %>
-</ol>
+<% item_total_cost_all_purchases = 0 %>
+<% if @items.count == 0 %>
+<p>Try entering a purchase with an item so this page shows you information.</p>
+<% else %>
+<%# @items.map(&:item_name).uniq.each do |item| %>
+<% list_item_count = 0 %>
+<% quantity_count = 0 %>
+<% occurences_count = 0 %>
+<% aa = 0.00 %>
+<% bb = 0.00 %>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table table-condensed table-striped" id="purchase_items">
+      <thead>
+
+        <tr>
+          <th class="col-sm-1">#</th>
+          <!-- <th class="col-xs-1">Brand name</th> -->
+          <th class="col-sm-1">Item name</th>
+          <!-- <th class="col-sm-1">Occurences</th> -->
+          <th class="col-sm-1">Purchases</th>
+          <th class="col-sm-1">Quantity</th>
+          <!-- <td class="col-sm-1">Weight</th> -->
+          <!-- <td class="col-sm-1">Measurement</th> -->
+          <!-- <th class="col-sm-1">Cost per item</th> -->
+          <th class="col-sm-1">Total Item Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @items_group.each do |item| %>
+        <!-- @items_group grabs a distinct records from Item.all  -->
+        <% if item.purchases.count > 0 %>
+        <!-- If the item.purchases.count is greater than 0, continue. This is a fail
+        safe to hide items that don't get deleted if the purchase is deleted
+        becasue has_many :through. -->
+        <% list_item_count = list_item_count + 1 %>
+        <!-- This is for a visual tally of how many items are shown -->
+        <tr>
+          <td><%= "#{list_item_count}" %></td>
+          <!-- <td><%= "#{item.try(:brand_name)}" %></td> -->
+          <td><%= "#{item.try(:item_name)}" %></td>
+          <% @items.each do |i| %>
+          <!-- @items is all Item.all records. -->
+            <% if i.item_name == item.item_name %>
+             <!-- I am comparing each item_name to the one that is distinct. -->
+              <% occurences_count = occurences_count + 1 %>
+              <% quantity_count = i.quantity + quantity_count %>
+              <% aa = item.cost + aa %>
+              <% bb = item.item_total_cost + bb %>
+              <% item_total_cost_all_purchases = item_total_cost_all_purchases + item.item_total_cost %>
+            <% end %>
+          <% end %>
+              <!-- Right now, this tallies and displays in one swoop. I need it to
+              tally only if the item_name is equal, then display afterward, then
+              be reset in the new tr. -->
+              <td><%= "#{occurences_count}" %></td>
+              <!-- <td><%= "#{item.purchases.count} "%></td> -->
+              <!-- Turns out that item.purchases.count grabs the grouped data which is
+              only ever going to be one since group grabs one distinct record. -->
+              <td><%= "#{quantity_count}"  %></td>
+              <!-- <td><%= "Weight: #{item.try(:weight)} |"  %></td> -->
+              <!-- <%= "Measurement: #{item.try(:measurement)} |"  %> -->
+              <!-- <%= item.cost ? number_to_currency("#{aa}") : 0 %> -->
+              <td><%= item.item_total_cost ? number_to_currency("#{bb}") : 0 %></td>
+
+
+            </tr>
+
+
+        <% quantity_count = 0 %>
+        <% occurences_count = 0 %>
+        <% aa = 0.00 %>
+        <% bb = 0.00 %>
+
+        <% end %>
+
+        <% end %>
+
+        <% end %>
+<tr>
+          <td>Total</td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td><%= number_to_currency(item_total_cost_all_purchases) %></td>
+
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
