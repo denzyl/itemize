@@ -22,9 +22,17 @@ ready = ->
     $(".first_input").find("input").focus();
     event.preventDefault()
 
+  $('form').on 'blur', '.item_cost_field', (event) ->
+    value1 = $('td.item_quantity_field input').val()
+    value2 = $('td.item_cost_field input').val()
+    value3 = value1 * value2
+    console.log(value3)
+    $('td.item_total_cost_field input').val(value3)
+    event.preventDefault()
+
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
-
 
 
 
