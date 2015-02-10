@@ -101,3 +101,8 @@ body {
   }
 }
 
+@media (min-width: 768px) {
+.form-inline .form-control {
+  width: 100%;
+}
+}

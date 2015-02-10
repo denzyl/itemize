@@ -1,12 +1,11 @@
 <tr class="item_table_row">
 
   <td class="row_index"><%= f.index == 0 ? 1 : f.index %></td>
-  <td><%= f.text_field :brand_name, class: 'form-control' %></td>
+  <td class="first_input"><%= f.text_field :brand_name, class: 'form-control' %></td>
   <td><%= f.text_field :item_name, class: 'form-control' %></td>
   <td><%= f.text_field :quantity, class: 'form-control' %></td>
   <td><%= f.text_field :weight, class: 'form-control' %></td>
   <td><%= f.text_field :measurement, class: 'form-control' %></td>
   <td><%= f.text_field :cost, class: 'form-control' %></td>
-  <td><%= f.text_field :item_total_cost, class: 'form-control' %></td>
-  <!-- <td><span class="aaron"></span></td> -->
+  <td class="item_total_cost_field"><%= f.text_field :item_total_cost, class: 'form-control item-total-cost'%></td>
 </tr>

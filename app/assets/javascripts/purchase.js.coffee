@@ -11,15 +11,20 @@ ready = ->
     console.log(this);
 
     container = document.getElementsByClassName('row_index')
+    console.log(container)
     lastchild = container[container.length-1].innerHTML
+    console.log(lastchild)
     new_index = parseInt(lastchild) + 1
     #time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
 
     $('tr.item_table_row:last').after($(this).data('fields').replace(regexp, new_index))
-
+    $(".first_input").find("input").focus();
     event.preventDefault()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
+
+
+
 

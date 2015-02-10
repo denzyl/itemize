@@ -1,5 +1,7 @@
 class PurchasesController < ApplicationController
 
+  before_filter :check_for_cancel, :only => [:create, :update]
+
   def index
     @purchases = Purchase.all.order(:purchased_on)
   end
@@ -43,6 +45,14 @@ class PurchasesController < ApplicationController
     @purchase = Purchase.find(params[:id])
     @purchase.destroy
     redirect_to purchases_path, notice: "Successfully destroyed purchase."
+  end
+
+
+
+  def check_for_cancel
+    if params[:commit] == "Cancel"
+      redirect_to my_page_path
+    end
   end
 
   private

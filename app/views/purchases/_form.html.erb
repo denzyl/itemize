@@ -19,14 +19,22 @@
 <table class="table table-condensed table-striped" id="purchase_items">
   <thead>
     <tr>
-      <th class="col-xs-1">#</th>
+      <th>#</th>
+      <th>Brand name</th>
+      <th>Item name</th>
+      <th>Quantity</th>
+      <th>Weight</th>
+      <th>Measurement</th>
+      <th>Cost</th>
+      <th>Total Item Cost</th>
+      <!-- <th class="col-xs-1">#</th>
       <th class="col-xs-1">Brand name</th>
       <th class="col-sm-1">Item name</th>
       <th class="col-sm-1">Quantity</th>
       <td class="col-sm-1">Weight</th>
       <td class="col-sm-1">Measurement</th>
       <th class="col-sm-1">Cost</th>
-      <th class="col-sm-1">Total Item Cost</th>
+      <th class="col-sm-1">Total Item Cost</th> -->
     </tr>
   </thead>
   <tbody>
@@ -39,12 +47,14 @@
 </div>
 </div>
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-6">
     <%= link_to_add_fields "Add Item", f, :items %>
-    <%= f.submit @purchase.new_record? ? 'Create' : 'Update', :class => 'btn btn-primary' %>
-
-      </div>
-    </div>
-    <br/>
+    <%= f.submit @purchase.new_record? ? 'Create' : 'Update', :class => 'btn btn-success' %>
+  </div>
+  <div class="col-sm-6">
+    <%= link_to 'Cancel', purchases_path, :class => 'btn btn-default pull-right' %>
+  </div>
+</div>
+<br/>
 
 <% end %>

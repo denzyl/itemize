@@ -4,7 +4,7 @@ module ApplicationHelper
     fields = f.fields_for(association, new_object, child_index: "new_item") do |builder|
       render(association.to_s.singularize + "_fields", locals.merge!(f: builder))
     end
-    link_to(name, '#', :class => "add_fields btn btn-default", data: {id: "new_item", fields: fields.gsub("\n", "")})
+    link_to(name, '#', :class => "add_fields btn btn-primary", data: {id: "new_item", fields: fields.gsub("\n", "")})
 
   end
 end
